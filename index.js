@@ -1,6 +1,7 @@
 // Importa os módulos express e body-parser
 const express = require('express');
 const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 3000;
 
 // Cria um aplicativo express
 const app = express();

@@ -1,14 +1,28 @@
-// Importa o módulo HTTP, que é necessário para criar um servidor HTTP básico
-const http = require('http');
+// Importa os módulos express e body-parser
+const express = require('express');
+const bodyParser = require('body-parser');
 
-// Cria um servidor HTTP que responde com "Olá, mundo!" para todas as solicitações
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Olá, mundo eu sou o back end!\n');
-});
+// Cria um aplicativo express
+const app = express();
 
-// O servidor escuta na porta 3001
-const PORT = process.env.port || 9001;
-server.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}/`);
+// Usa o middleware body-parser para analisar os corpos das solicitações
+app.use(bodyParser.json());
+
+// Define um objeto de usuários para simplificar. Em uma aplicação real, você usaria um banco de dados.
+const users = {
+  'usuario1': 'senha1',
+  'usuario2': 'senha2'
+};
+
+// Define uma rota POST /login
+app.post('/login', (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  // Verifica se o nome de usuário e a senha estão corretos
+  if (users[username] && users[username] === password) {
+    res.status(200).send({ message: 'Login bem-sucedido' });
+  } else {
+    res.status(401).send({ message: 'Nome de usuário ou senha inválidos' });
+  }
 });

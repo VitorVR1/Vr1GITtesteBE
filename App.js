@@ -8,7 +8,7 @@ const server = http.createServer((req, res) => {
 });
 
 // O servidor escuta na porta 3001
-const port = process.env.port || 3001;
+const port = process.env.port || 9001;
 server.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}/`);
 });

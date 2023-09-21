@@ -1,29 +1,19 @@
-// Importa os módulos express e body-parser
 const express = require('express');
-const bodyParser = require('body-parser');
-const PORT = process.env.PORT || 3000;
-
-// Cria um aplicativo express
 const app = express();
 
-// Usa o middleware body-parser para analisar os corpos das solicitações
-app.use(bodyParser.json());
+app.use(express.json());
 
-// Define um objeto de usuários para simplificar. Em uma aplicação real, você usaria um banco de dados.
-const users = {
-  'usuario1': 'senha1',
-  'usuario2': 'senha2'
-};
-
-// Define uma rota POST /login
 app.post('/login', (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+  const { username, password } = req.body;
 
-  // Verifica se o nome de usuário e a senha estão corretos
-  if (users[username] && users[username] === password) {
-    res.status(200).send({ message: 'Login bem-sucedido' });
+  // Aqui você pode adicionar a lógica de validação do login e senha
+  // Por exemplo, você pode verificar se o username e password correspondem a um usuário válido no banco de dados
+
+  if (username === 'admin' && password === 'password') {
+    res.status(200).json({ message: 'Login successful' });
   } else {
-    res.status(401).send({ message: 'Nome de usuário ou senha inválidos' });
+    res.status(401).json({ message: 'Invalid username or password' });
   }
 });
+
+module.exports = app;

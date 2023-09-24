@@ -8,7 +8,7 @@ app.post('/login', (req, res) => {
 
   // Aqui você pode adicionar a lógica de validação do login e senha
   // Por exemplo, você pode verificar se o username e password correspondem a um usuário válido no banco de dados
-  print('Olá mundo!')
+  console.log('Olá mundo!')
   if (username === 'admin' && password === 'password') {
     res.status(200).json({ message: 'Login successful' });
   } else {
